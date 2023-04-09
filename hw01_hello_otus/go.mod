@@ -1,4 +1,4 @@
-module github.com/sergeyyarin/hw01_hello_otus
+module github.com/sergeyyarin/otus_go/hw01_hello_otus
 
 go 1.19
 
