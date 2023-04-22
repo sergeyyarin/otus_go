@@ -45,15 +45,15 @@ func Unpack(s string) (result string, err error) {
 	var last rune
 	var unpacked []rune
 	for _, v := range packed {
-		if unicode.IsLetter(v) {
-			unpacked = append(unpacked, v)
-		} else if unicode.IsDigit(v) {
+		if unicode.IsDigit(v) {
 			if unicode.IsDigit(last) { // no more than one digit allowed
 				return "", ErrInvalidString
 			}
 			unpacked = TrimRuneSlice(unpacked, 1)
 			times := runeToInt(v)
 			unpacked = append(unpacked, RepeatRune(last, times)...)
+		} else {
+			unpacked = append(unpacked, v)
 		}
 		last = v
 	}
