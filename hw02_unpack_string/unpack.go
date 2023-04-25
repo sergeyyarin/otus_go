@@ -50,8 +50,8 @@ func Unpack(s string) (result string, err error) {
 				return "", ErrInvalidString
 			}
 			unpacked = TrimRuneSlice(unpacked, 1)
-			times := runeToInt(v)
-			unpacked = append(unpacked, RepeatRune(last, times)...)
+			repeatCount := runeToInt(v)
+			unpacked = append(unpacked, RepeatRune(last, repeatCount)...)
 		} else {
 			unpacked = append(unpacked, v)
 		}
