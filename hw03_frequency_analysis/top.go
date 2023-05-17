@@ -1,6 +1,58 @@
 package hw03frequencyanalysis
 
-func Top10(_ string) []string {
-	// Place your code here.
-	return nil
+import (
+	"sort"
+	"strings"
+)
+
+type Frequency struct {
+	count int
+	word  string
+}
+
+func Top10(s string) []string {
+	if len(s) == 0 {
+		return nil
+	}
+
+	tokenCount := make(map[string]int, len(s))
+	for _, token := range strings.Fields(s) {
+		tokenCount[token]++
+	}
+
+	frequencies := make([]Frequency, len(tokenCount))
+	for word, count := range tokenCount {
+		frequencies = append(frequencies, Frequency{count, word})
+	}
+
+	sort.Slice(frequencies, func(i, j int) bool {
+		return frequencies[i].count > frequencies[j].count
+	})
+
+	var result []string
+	var currCount, nextCount int
+	for n := 0; n < 10; {
+		currCount = frequencies[n].count
+		nextCount = frequencies[n+1].count
+
+		if currCount > nextCount {
+			result = append(result, frequencies[n].word)
+			n++
+			continue
+		}
+
+		var equalCounts []string
+		prevCount := currCount
+		for currCount == prevCount {
+			equalCounts = append(equalCounts, frequencies[n].word)
+			n++
+			prevCount = currCount
+			currCount = frequencies[n].count
+		}
+		sort.Strings(equalCounts)
+
+		result = append(result, equalCounts...)
+	}
+
+	return result
 }
