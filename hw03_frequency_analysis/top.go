@@ -20,7 +20,7 @@ func Top10(s string) []string {
 		tokenCount[token]++
 	}
 
-	frequencies := make([]Frequency, len(tokenCount))
+	frequencies := make([]Frequency, 0)
 	for word, count := range tokenCount {
 		frequencies = append(frequencies, Frequency{count, word})
 	}
