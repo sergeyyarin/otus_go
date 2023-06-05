@@ -35,7 +35,7 @@ func Top10(s string) []string {
 		currCount = frequencies[n].count
 		nextCount = frequencies[n+1].count
 
-		if currCount > nextCount {
+		if currCount > nextCount && n < 10 {
 			result = append(result, frequencies[n].word)
 			n++
 			continue
@@ -43,7 +43,7 @@ func Top10(s string) []string {
 
 		var equalCounts []string
 		prevCount := currCount
-		for currCount == prevCount {
+		for currCount == prevCount && n < 10 {
 			equalCounts = append(equalCounts, frequencies[n].word)
 			n++
 			prevCount = currCount
